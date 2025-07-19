@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   const { month } = req.query; // month format: YYYY-MM
   try {
     const result = await db.query(
-      'SELECT * FROM nisa.sister_fun WHERE to_char(date, $1) = $2 ORDER BY date',
+      'SELECT * FROM sister_fun WHERE to_char(date, $1) = $2 ORDER BY date',
       ['YYYY-MM', month]
     );
     res.json(result.rows);
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 router.get('/:date', async (req, res) => {
   const date = req.params.date; // format: YYYY-MM-DD
   try {
-    const result = await db.query('SELECT * FROM nisa.sister_fun WHERE date = $1', [date]);
+    const result = await db.query('SELECT * FROM sister_fun WHERE date = $1', [date]);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'No entry for this date' });
     }
@@ -35,18 +35,18 @@ router.post('/', async (req, res) => {
   const { date, description, rating } = req.body;
   try {
     // Check if entry exists
-    const check = await db.query('SELECT * FROM nisa.sister_fun WHERE date = $1', [date]);
+    const check = await db.query('SELECT * FROM sister_fun WHERE date = $1', [date]);
     let result;
     if (check.rows.length > 0) {
       // Update
       result = await db.query(
-        'UPDATE nisa.sister_fun SET description = $1, rating = $2 WHERE date = $3 RETURNING *',
+        'UPDATE sister_fun SET description = $1, rating = $2 WHERE date = $3 RETURNING *',
         [description, rating, date]
       );
     } else {
       // Insert
       result = await db.query(
-        'INSERT INTO nisa.sister_fun (date, description, rating) VALUES ($1, $2, $3) RETURNING *',
+        'INSERT INTO sister_fun (date, description, rating) VALUES ($1, $2, $3) RETURNING *',
         [date, description, rating]
       );
     }
@@ -62,7 +62,7 @@ router.put('/:id', async (req, res) => {
   const { description, rating } = req.body;
   try {
     const result = await db.query(
-      'UPDATE nisa.sister_fun SET description = $1, rating = $2 WHERE id = $3 RETURNING *',
+      'UPDATE sister_fun SET description = $1, rating = $2 WHERE id = $3 RETURNING *',
       [description, rating, id]
     );
     res.json(result.rows[0]);
@@ -75,7 +75,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const id = req.params.id;
   try {
-    await db.query('DELETE FROM nisa.sister_fun WHERE id = $1', [id]);
+    await db.query('DELETE FROM sister_fun WHERE id = $1', [id]);
     res.json({ message: 'Entry deleted.' });
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -5,7 +5,7 @@ const fetch = (...args) => import('node-fetch').then(mod => mod.default(...args)
 // Get all pinterest entries
 router.get('/', async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM nisa.pinterest ORDER BY id DESC');
+    const result = await db.query('SELECT * FROM pinterest ORDER BY id DESC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
   const { link, note } = req.body;
   try {
     const result = await db.query(
-      'INSERT INTO nisa.pinterest (link, note) VALUES ($1, $2) RETURNING *',
+      'INSERT INTO pinterest (link, note) VALUES ($1, $2) RETURNING *',
       [link, note]
     );
     res.status(201).json(result.rows[0]);
@@ -48,7 +48,7 @@ router.get('/preview', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   try {
-    const result = await db.query('SELECT * FROM nisa.pinterest WHERE id = $1', [id]);
+    const result = await db.query('SELECT * FROM pinterest WHERE id = $1', [id]);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Not found' });
     }
@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
   const { link, note } = req.body;
   try {
     const result = await db.query(
-      'UPDATE nisa.pinterest SET link = $1, note = $2 WHERE id = $3 RETURNING *',
+      'UPDATE pinterest SET link = $1, note = $2 WHERE id = $3 RETURNING *',
       [link, note, id]
     );
     res.json(result.rows[0]);
@@ -77,7 +77,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const id = req.params.id;
   try {
-    await db.query('DELETE FROM nisa.pinterest WHERE id = $1', [id]);
+    await db.query('DELETE FROM pinterest WHERE id = $1', [id]);
     res.json({ message: 'Entry deleted.' });
   } catch (err) {
     res.status(500).json({ error: err.message });
