@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pinterestlerim</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <a href="/" class="back-btn">&#8592; Back to Home</a>
+  <h1>Pinterestlerim</h1>
+  <section id="pinterest-section">
+    <button id="add-pinterest-btn" class="add-btn">+ Add Pinterest</button>
+    <div id="pinterest-list"></div>
+  </section>
+  <div id="modal-overlay" style="display:none;"></div>
+  <div id="pinterest-modal" style="display:none;">
+    <h4 id="pinterest-modal-title">Add/Edit Pinterest</h4>
+    <form id="pinterest-modal-form">
+      <input type="text" id="pinterest-modal-link" placeholder="Pinterest Link" required>
+      <textarea id="pinterest-modal-note" placeholder="Your note about this photo" required></textarea>
+      <button type="submit" id="pinterest-modal-save-btn">Save</button>
+      <button type="button" onclick="closePinterestModal()">Cancel</button>
+    </form>
+  </div>
+  <script src="/public/js/pinterest.js"></script>
+</body>
+</html> 

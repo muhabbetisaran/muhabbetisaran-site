@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nisa's Drawings</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <a href="/" class="back-btn">&#8592; Back to Home</a>
+  <h1>Çizimlerim</h1>
+  <section id="drawings-section">
+    <button id="add-drawing-btn" class="add-btn">+ Add Drawing</button>
+    <div id="drawings-list"></div>
+  </section>
+  <div id="modal-overlay" style="display:none;"></div>
+  <div id="drawing-modal" style="display:none;">
+    <h4 id="drawing-modal-title">Add/Edit Drawing</h4>
+    <form id="drawing-modal-form" enctype="multipart/form-data">
+      <input type="text" id="drawing-modal-note" placeholder="Drawing Name/Title" required>
+      <label>Drawing Image:
+        <input type="file" id="drawing-modal-drawing" name="drawing" accept="image/*">
+      </label>
+      <label>Original Image:
+        <input type="file" id="drawing-modal-original" name="original" accept="image/*">
+      </label>
+      <div class="drawing-modal-previews">
+        <img id="preview-drawing" class="drawing-img-preview" style="display:none;" />
+        <img id="preview-original" class="drawing-img-preview" style="display:none;" />
+      </div>
+      <button type="submit" id="drawing-modal-save-btn">Save</button>
+      <button type="button" onclick="closeDrawingModal()">Cancel</button>
+    </form>
+  </div>
+  <script src="/public/js/drawings.js"></script>
+</body>
+</html> 

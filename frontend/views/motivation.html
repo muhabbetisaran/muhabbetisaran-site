@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nisa's Motivation</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <a href="/" class="back-btn">&#8592; Back to Home</a>
+  <h1>Motivasyon</h1>
+  <section id="motivation-section">
+    <button id="add-motivation-btn" class="add-btn">+ Add Motivation</button>
+    <div id="motivation-list"></div>
+  </section>
+  <div id="modal-overlay" style="display:none;"></div>
+  <div id="motivation-modal" style="display:none;">
+    <h4 id="motivation-modal-title">Add/Edit Motivation</h4>
+    <form id="motivation-modal-form">
+      <textarea id="motivation-modal-text" placeholder="Your motivational text..." required></textarea>
+      <button type="submit" id="motivation-modal-save-btn">Save</button>
+      <button type="button" onclick="closeMotivationModal()">Cancel</button>
+    </form>
+  </div>
+  <script src="/public/js/motivation.js"></script>
+</body>
+</html> 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nisa's Movies & TV Shows</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <a href="/" class="back-btn">&#8592; Back to Home</a>
+  <h1>Filmler ve Diziler</h1>
+  <section id="shows-section">
+    <h2>Movies & Series</h2>
+    <div id="shows-list"></div>
+    <h3>Add a New Movie/Series</h3>
+    <form id="show-form">
+      <input type="text" id="show-title" placeholder="Title" required>
+      <select id="show-type" required>
+        <option value="movie">Movie</option>
+        <option value="series">Series</option>
+      </select>
+      <input type="text" id="show-description" placeholder="Description" required>
+      <input type="text" id="show-best_line" placeholder="Best Line">
+      <input type="text" id="show-youtube_link" placeholder="YouTube Link">
+      <input type="text" id="show-instagram_link" placeholder="Instagram Link">
+      <button type="submit">Add Movie/Series</button>
+    </form>
+  </section>
+  <!-- Edit Show Modal -->
+  <div id="edit-show-modal" style="display:none;">
+    <h4>Edit Movie/Series</h4>
+    <form id="edit-show-form">
+      <input type="text" id="edit-show-title" placeholder="Title" required>
+      <select id="edit-show-type" required>
+        <option value="movie">Movie</option>
+        <option value="series">Series</option>
+      </select>
+      <input type="text" id="edit-show-description" placeholder="Description" required>
+      <input type="text" id="edit-show-best_line" placeholder="Best Line">
+      <input type="text" id="edit-show-youtube_link" placeholder="YouTube Link">
+      <input type="text" id="edit-show-instagram_link" placeholder="Instagram Link">
+      <button type="submit">Save</button>
+    </form>
+    <button onclick="closeEditShowModal()">Cancel</button>
+  </div>
+  <div id="modal-overlay" style="display:none;"></div>
+  <script src="/public/js/shows.js"></script>
+</body>
+</html>

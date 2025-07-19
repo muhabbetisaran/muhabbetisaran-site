@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nisa's K-pop Crushes</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <a href="/" class="back-btn">&#8592; Back to Home</a>
+  <h1>CRUSHLARIM</h1>
+  <section id="crushes-section">
+
+    <div id="crushes-list"></div>
+
+    <h3>Add a New Crush</h3>
+    <form id="crush-form">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="text" id="description" placeholder="Description" required>
+      <input type="text" id="instagram_link" placeholder="Instagram Link">
+      <input type="text" id="youtube_link" placeholder="YouTube Link">
+      <button type="submit">Add Crush</button>
+    </form>
+  </section>
+  <!-- Photo Upload Modal -->
+  <div id="photo-upload-modal" style="display:none;">
+    <h4>Upload Photo for <span id="modal-crush-name"></span></h4>
+    <form id="photo-upload-form">
+      <input type="file" id="photo-file" name="photo" accept="image/*" required>
+      <button type="submit">Upload</button>
+    </form>
+    <button onclick="closePhotoModal()">Close</button>
+  </div>
+  <!-- Edit Crush Modal -->
+  <div id="edit-modal" style="display:none;">
+    <h4>Edit Crush</h4>
+    <form id="edit-form">
+      <input type="text" id="edit-name" placeholder="Name" required>
+      <input type="text" id="edit-description" placeholder="Description" required>
+      <input type="text" id="edit-instagram_link" placeholder="Instagram Link">
+      <input type="text" id="edit-youtube_link" placeholder="YouTube Link">
+      <button type="submit">Save</button>
+    </form>
+    <button onclick="closeEditModal()">Cancel</button>
+  </div>
+  <div id="modal-overlay" style="display:none;"></div>
+  <script src="/public/js/main.js"></script>
+</body>
+</html>

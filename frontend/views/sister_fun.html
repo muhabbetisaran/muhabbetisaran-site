@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sister Fun Calendar</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <a href="/" class="back-btn">&#8592; Back to Home</a>
+  <h1>Abla Zorbalama Takvimi</h1>
+  <div id="today-date" class="calendar-today"></div>
+  <div id="birthday-animation" style="display:none;">
+    <div class="party-emoji">🎉🎂🎈 Happy Birthday Nisa! 🎈🎂🎉</div>
+  </div>
+  <section id="calendar-section">
+    <div id="calendar"></div>
+    <div id="fun-entry">
+      <h3 id="entry-title">Write your fun for today!</h3>
+      <div id="no-fun-message" style="display:none;"></div>
+      <div id="random-message" style="display:none;"></div>
+      <button type="button" id="fun-delete-btn" style="display:none;">Delete</button>
+    </div>
+  </section>
+  <div id="modal-overlay" style="display:none;"></div>
+  <div id="joke-modal" style="display:none;">
+    <h4 id="joke-modal-title">Add/Edit Joke</h4>
+    <form id="joke-modal-form">
+      <textarea id="joke-modal-description" placeholder="How did you make fun of your sister?" required></textarea>
+      <label for="joke-modal-rating">Rate your joke:</label>
+      <select id="joke-modal-rating" required>
+        <option value="">Select</option>
+        <option value="1">1 - Not funny</option>
+        <option value="2">2</option>
+        <option value="3">3 - Decent</option>
+        <option value="4">4</option>
+        <option value="5">5 - Hilarious!</option>
+      </select>
+      <button type="submit" id="joke-modal-save-btn">Save</button>
+      <button type="button" onclick="closeJokeModal()">Cancel</button>
+    </form>
+  </div>
+  <script src="/public/js/sister_fun.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nisa's Site</title>
+  <link rel="stylesheet" href="/public/css/style.css">
+</head>
+<body>
+  <img id="bg-img" style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:contain;z-index:-1;pointer-events:none;" />
+  <h1>Site Muhabbetisaran</h1>
+  <h5>If your muhabbet does not sarıyo, then please leave the website!!!</h5>
+  <nav>
+    <ul class="nav-bar">
+      <div class="nav-group nav-left">
+        <li><a href="/crushes">CRUSHLAR</a></li>
+        <li><a href="/shows">Dizi ve Filmler</a></li>
+        <li><a href="/sister-fun">ABLA ZORBALAMACA</a></li>
+      </div>
+      <div class="nav-group nav-right">
+        <li><a href="/pinterest">Pintereeest</a></li>
+        <li><a href="/drawings">Çizimlerr</a></li>
+        <li><a href="/motivation">You can achieve</a></li>
+      </div>
+    </ul>
+  </nav>
+  <script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const res = await fetch('/api/backgrounds');
+  const images = await res.json();
+  if (images.length > 0) {
+    const random = images[Math.floor(Math.random() * images.length)];
+    document.body.style.backgroundImage = `url('/backgrounds/${random}')`;
+    document.body.style.backgroundSize = 'contain';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    document.body.style.backgroundAttachment = 'fixed';
+  }
+});
+</script>
+</body>
+</html>
