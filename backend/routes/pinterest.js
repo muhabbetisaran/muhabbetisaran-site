@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');
-const fetch = require('node-fetch');
-
+const fetch = (...args) => import('node-fetch').then(mod => mod.default(...args));
 // Get all pinterest entries
 router.get('/', async (req, res) => {
   try {
