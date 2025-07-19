@@ -7,8 +7,8 @@ router.get('/', async (req, res) => {
   const { month } = req.query; // month format: YYYY-MM
   try {
     const result = await db.query(
-      'SELECT * FROM sister_fun WHERE to_char(date, $1) = $2 ORDER BY date',
-      ['YYYY-MM', month]
+      "SELECT * FROM sister_fun WHERE to_char(date, 'YYYY-MM') = $1 ORDER BY date",
+      [month]
     );
     res.json(result.rows);
   } catch (err) {
