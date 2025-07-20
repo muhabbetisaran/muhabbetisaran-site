@@ -26,7 +26,7 @@ console.log("crushesRouter after multer");
 // Get all crushes
 router.get('/', async (req, res) => {
     try {
-      const result = await db.query('SELECT * FROM crushes ORDER BY id DESC');
+      const result = await db.query('SELECT * FROM nisa.crushes ORDER BY id DESC');
       res.json(result.rows);
     } catch (err) {
       res.status(500).json({ error: err.message });
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
     const { name, description, instagram_link, youtube_link } = req.body;
     try {
       const result = await db.query(
-        'INSERT INTO crushes (name, description, instagram_link, youtube_link) VALUES ($1, $2, $3, $4) RETURNING *',
+        'INSERT INTO nisa.crushes (name, description, instagram_link, youtube_link) VALUES ($1, $2, $3, $4) RETURNING *',
         [name, description, instagram_link, youtube_link]
       );
       res.status(201).json(result.rows[0]);
@@ -53,7 +53,7 @@ router.post('/:id/photos', upload.single('photo'), async (req, res) => {
   const photoUrl = `/public/uploads/${req.file.filename}`;
   try {
     await db.query(
-      'INSERT INTO crush_photos (crush_id, photo_url) VALUES ($1, $2)',
+      'INSERT INTO nisa.crush_photos (crush_id, photo_url) VALUES ($1, $2)',
       [crushId, photoUrl]
     );
     res.status(201).json({ photoUrl });
@@ -67,7 +67,7 @@ router.get('/:id/photos', async (req, res) => {
   const crushId = req.params.id;
   try {
     const result = await db.query(
-      'SELECT * FROM crush_photos WHERE crush_id = $1',
+      'SELECT * FROM nisa.crush_photos WHERE crush_id = $1',
       [crushId]
     );
     res.json(result.rows);
@@ -82,7 +82,7 @@ console.log("crushesRouter after photo get");
 router.get('/:id', async (req, res) => {
   const crushId = req.params.id;
   try {
-    const result = await db.query('SELECT * FROM crushes WHERE id = $1', [crushId]);
+    const result = await db.query('SELECT * FROM nisa.crushes WHERE id = $1', [crushId]);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Crush not found' });
     }
@@ -97,7 +97,7 @@ router.put('/:id', async (req, res) => {
   const { name, description, instagram_link, youtube_link } = req.body;
   try {
     const result = await db.query(
-      'UPDATE crushes SET name = $1, description = $2, instagram_link = $3, youtube_link = $4 WHERE id = $5 RETURNING *',
+      'UPDATE nisa.crushes SET name = $1, description = $2, instagram_link = $3, youtube_link = $4 WHERE id = $5 RETURNING *',
       [name, description, instagram_link, youtube_link, crushId]
     );
     res.json(result.rows[0]);
@@ -113,9 +113,9 @@ router.delete('/:id', async (req, res) => {
   const crushId = req.params.id;
   try {
     // Delete associated photos first (if you want to remove files from disk, add code here)
-    await db.query('DELETE FROM crush_photos WHERE crush_id = $1', [crushId]);
+    await db.query('DELETE FROM nisa.crush_photos WHERE crush_id = $1', [crushId]);
     // Delete the crush
-    await db.query('DELETE FROM crushes WHERE id = $1', [crushId]);
+    await db.query('DELETE FROM nisa.crushes WHERE id = $1', [crushId]);
     res.json({ message: 'Crush and associated photos deleted.' });
   } catch (err) {
     res.status(500).json({ error: err.message });

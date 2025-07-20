@@ -22,7 +22,7 @@ const upload = multer({ storage: storage });
 // List all drawings
 router.get('/', async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM drawings ORDER BY id DESC');
+    const result = await db.query('SELECT * FROM nisa.drawings ORDER BY id DESC');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -39,7 +39,7 @@ router.post('/', upload.fields([
   const original_url = req.files['original'] ? `/public/uploads/${req.files['original'][0].filename}` : null;
   try {
     const result = await db.query(
-      'INSERT INTO drawings (drawing_url, original_url, note) VALUES ($1, $2, $3) RETURNING *',
+      'INSERT INTO nisa.drawings (drawing_url, original_url, note) VALUES ($1, $2, $3) RETURNING *',
       [drawing_url, original_url, note]
     );
     res.status(201).json(result.rows[0]);
@@ -52,7 +52,7 @@ router.post('/', upload.fields([
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
   try {
-    const result = await db.query('SELECT * FROM drawings WHERE id = $1', [id]);
+    const result = await db.query('SELECT * FROM nisa.drawings WHERE id = $1', [id]);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Not found' });
     }
@@ -72,7 +72,7 @@ router.put('/:id', upload.fields([
   let drawing_url, original_url;
 
   // Get current entry
-  const current = await db.query('SELECT * FROM drawings WHERE id = $1', [id]);
+  const current = await db.query('SELECT * FROM nisa.drawings WHERE id = $1', [id]);
   if (current.rows.length === 0) return res.status(404).json({ error: 'Not found' });
 
   drawing_url = req.files['drawing'] ? `/public/uploads/${req.files['drawing'][0].filename}` : current.rows[0].drawing_url;
@@ -80,7 +80,7 @@ router.put('/:id', upload.fields([
 
   try {
     const result = await db.query(
-      'UPDATE drawings SET drawing_url = $1, original_url = $2, note = $3 WHERE id = $4 RETURNING *',
+      'UPDATE nisa.drawings SET drawing_url = $1, original_url = $2, note = $3 WHERE id = $4 RETURNING *',
       [drawing_url, original_url, note, id]
     );
     res.json(result.rows[0]);
@@ -94,7 +94,7 @@ router.delete('/:id', async (req, res) => {
   const id = req.params.id;
   try {
     // Get current entry to delete images
-    const current = await db.query('SELECT * FROM drawings WHERE id = $1', [id]);
+    const current = await db.query('SELECT * FROM nisa.drawings WHERE id = $1', [id]);
     if (current.rows.length > 0) {
       const entry = current.rows[0];
       // Delete drawing image
@@ -108,7 +108,7 @@ router.delete('/:id', async (req, res) => {
         if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
       }
     }
-    await db.query('DELETE FROM drawings WHERE id = $1', [id]);
+    await db.query('DELETE FROM nisa.drawings WHERE id = $1', [id]);
     res.json({ message: 'Entry deleted.' });
   } catch (err) {
     res.status(500).json({ error: err.message });

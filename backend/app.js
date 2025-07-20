@@ -88,7 +88,7 @@ app.get('/api/debug-tables', async (req, res) => {
 // Test route: fetches data from crushes
 app.get('/api/test', async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM crushes LIMIT 1');
+    const result = await db.query('SELECT * FROM nisa.crushes LIMIT 1');
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
