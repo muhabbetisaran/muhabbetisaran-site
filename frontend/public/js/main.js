@@ -1,13 +1,17 @@
 let currentCrushId = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const res = await fetch('/api/backgrounds');
-  const images = await res.json();
-  if (images.length > 0) {
-    const random = images[Math.floor(Math.random() * images.length)];
-    const bgImg = document.getElementById('bg-img');
-    bgImg.src = `/backgrounds/${random}`;
-    bgImg.style.display = 'block';
+  const bgImg = document.getElementById('bg-img'); 
+  if(bgImg){
+    const res = await fetch('/api/backgrounds');
+    const images = await res.json();
+    if (images.length > 0) {
+      const random = images[Math.floor(Math.random() * images.length)];
+      bgImg.src = `/backgrounds/${random}`;
+      bgImg.style.display = 'block';
+  }
+  
+  
   }
 });
 
