@@ -51,8 +51,8 @@ router.post('/', upload.fields([
   { name: 'original', maxCount: 1 }
 ]), async (req, res) => {
   const { note } = req.body;
-  const drawing_url = req.files['drawing'] ? `/public/uploads/${req.files['drawing'][0].filename}` : null;
-  const original_url = req.files['original'] ? `/public/uploads/${req.files['original'][0].filename}` : null;
+  let drawing_url = req.files['drawing'] ? `/public/uploads/${req.files['drawing'][0].filename}` : null;
+  let original_url = req.files['original'] ? `/public/uploads/${req.files['original'][0].filename}` : null;
   try {
     if (req.files['drawing'] && req.files['drawing'][0]) {
       drawing_url = req.files['drawing'][0].path;
